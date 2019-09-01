@@ -41,7 +41,7 @@ def classify(X_train, y_train,configs):
 
 			f1_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='f1_macro')
 
-			return accuracy_scores, accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
+			return accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
 		else:
-			return accuracy_scores, accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores
+			return accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores
 
