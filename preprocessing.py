@@ -9,8 +9,15 @@ import numpy as np
 from sklearn.impute import SimpleImputer
 def preprocess(data_url, dataname,configs): 
 	s=requests.get(data_url).content
-	data = pd.read_csv(io.StringIO(s.decode('utf-8')))
+	
+	if dataname=="KDD_10_percent":
+		
+		data = pd.read_csv('./Kdd_Data/kddcup.data_10_percent')
+	else:
 
+		data = pd.read_csv(io.StringIO(s.decode('utf-8')))
+
+	
 	if dataname=="Wisconsin_Diagnostic_Breast_Cancer":
 
 		y_train = np.array(pd.factorize(data.iloc[:,1])[0]).reshape(-1,1)
@@ -20,6 +27,7 @@ def preprocess(data_url, dataname,configs):
 		#import ipdb;ipdb.set_trace()
 
 		if configs['preprocessing']['Missing_Instance']:
+			print("Missing Instance replaced with median")
 
 			imp = SimpleImputer(missing_values='?',fill_value=np.nan, strategy='constant')
 			
@@ -33,6 +41,7 @@ def preprocess(data_url, dataname,configs):
 
 		
 		if configs['preprocessing']['StandardScaler']:
+			print("Using Standard Scaler")
 			from sklearn.preprocessing import StandardScaler
 		
 			scaler = StandardScaler()
@@ -52,6 +61,7 @@ def preprocess(data_url, dataname,configs):
 		features = np.array(data.iloc[:,0:-1])
 
 		if configs['preprocessing']['Missing_Instance']:
+			print("Missing Instance replaced with median")
 			#using mean-strategies to replace the missing values
 			imp = SimpleImputer(missing_values='?',fill_value=np.nan, strategy='constant')
 			features_new = imp.fit_transform(features)
@@ -63,9 +73,20 @@ def preprocess(data_url, dataname,configs):
 
 		if configs['preprocessing']['StandardScaler']:
 			from sklearn.preprocessing import StandardScaler
+			print("Using Standard Scaler")
 		
 			scaler = StandardScaler()
 		
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+
+		elif configs['preprocessing']['MinMaxScaler']:
+			from sklearn.preprocessing import MinMaxScaler
+			print("Using MinMax Scaler")
+			
+			scaler=MinMaxScaler(feature_range=(0,1))
+			
 			scaled_features = scaler.fit_transform(features)
 
 			X_train = scaled_features
@@ -89,6 +110,7 @@ def preprocess(data_url, dataname,configs):
 
 		if configs['preprocessing']['Missing_Instance']:
 			#using mean-strategies to replace the missing values
+			print("Missing instance replaced with median")
 			imp = SimpleImputer(missing_values='?',fill_value=np.nan, strategy='constant')
 			features_new = imp.fit_transform(features)
 			imp_rem = SimpleImputer(missing_values=np.nan, strategy='median')
@@ -101,18 +123,92 @@ def preprocess(data_url, dataname,configs):
 
 		if configs['preprocessing']['StandardScaler']:
 			from sklearn.preprocessing import StandardScaler
-		
+			print("Using Standard Scaler")
 			scaler = StandardScaler()
 		
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+
+		elif configs['preprocessing']['MinMaxScaler']:
+			from sklearn.preprocessing import MinMaxScaler
+			print("Using MinMax Scaler")
+			
+			scaler=MinMaxScaler(feature_range=(0,1))
+			
 			scaled_features = scaler.fit_transform(features)
 
 			X_train = scaled_features
 		else: 
 			X_train = features
 		
-		#import ipdb;ipdb.set_trace()
+	if dataname=="Epileptic_Seizure":
+		y_train = np.array(data.iloc[:,-1])
+		features = np.array(data.iloc[:,1:-1])
+
+		if configs['preprocessing']['StandardScaler']:
+			from sklearn.preprocessing import StandardScaler
+			print("Using StandardScaler")
+		
+			scaler = StandardScaler()
+		
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		elif configs['preprocessing']['MinMaxScaler']:
+			from sklearn.preprocessing import MinMaxScaler
+			print("Using MinMax Scaler")
+			
+			scaler=MinMaxScaler(feature_range=(0,1))
+			
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		else:
+			X_train = features
+
+	if dataname=="KDD_10_percent":
+		y_train = pd.factorize(data.iloc[:,-1])[0]
+		
+		features = data.iloc[:,0:-1]
+
+		features.iloc[:,1] = pd.factorize(data.iloc[:,1])[0]
+
+		features.iloc[:,2] = pd.factorize(data.iloc[:,2])[0]
+
+		features.iloc[:,3] = pd.factorize(data.iloc[:,3])[0]
+
+		features = np.array(features)
+
+	
+
+		if configs['preprocessing']['StandardScaler']:
+			from sklearn.preprocessing import StandardScaler
+			print("Using StandardScaler")
+		
+			scaler = StandardScaler()
+		
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		elif configs['preprocessing']['MinMaxScaler']:
+			from sklearn.preprocessing import MinMaxScaler
+			print("Using MinMax Scaler")
+			
+			scaler=MinMaxScaler(feature_range=(0,1))
+			
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		else:
+			X_train = features
+
+		
+		
 		
 	return X_train, y_train.reshape(-1,) 
+
+
 
 
 
