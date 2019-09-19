@@ -24,13 +24,14 @@ features, labels = preprocessing.preprocess(data_url,data_name,configs)
 scores = classification.classify(features,labels,configs)
 
 print("The accuracy scores for 5 folds are, ",scores[0])
-print("The homogeneity scores for 5 folds are, ",scores[1])
-print("The mutual information scores for 5 folds are, ",scores[2])
-print("The completeness scores for 5 folds are, ",scores[3])
+print("The adjusted rand score for 5 folds are, ",scores[1])
+print("The homogeneity scores for 5 folds are, ",scores[2])
+print("The mutual information scores for 5 folds are, ",scores[3])
+print("The completeness scores for 5 folds are, ",scores[4])
 
 
 if configs['classification type']=="Binary":
-	print("The f1 scores for 5 folds are, ",scores[3])
+	print("The f1 scores for 5 folds are, ",scores[5])
 
 
 

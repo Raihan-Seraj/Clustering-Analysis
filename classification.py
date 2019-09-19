@@ -41,7 +41,17 @@ def classify(X_train, y_train,configs):
 
 			f1_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='f1_macro')
 
-			return accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
 		else:
-			return accuracy_scores, homogeneity_scores, mutual_info_scores, completeness_scores
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores
+
+	if configs['algorithm']['name']=="X-means":
+		
+		min_num_clusters = ['algorithm']['minimum number of clusters']
+
+		max_num_clusters = ['algorithm']['maximum number of clusters']
+
+		
+
+
 
