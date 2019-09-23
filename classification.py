@@ -2,11 +2,10 @@ from sklearn.cluster import *
 # from pyclustering.cluster.xmeans import xmeans 
 # from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer
 from classifiers import x_means
-from k_means_constrained import KMeansConstrained
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import adjusted_rand_score
 
-
+from k_means_constrained import KMeansConstrained
 
 
 def classify(X_train, y_train,configs):
@@ -83,13 +82,15 @@ def classify(X_train, y_train,configs):
 
 	if configs['algorithm']['name']=="Constrained_K-means":
 
-		min_num_clusters = configs['algorithm']['minimum number of clusters']
+		min_num_constraints = configs['algorithm']['minimum number of constraints']
 
-		max_num_clusters = configs['algorithm']['maximum number of clusters']
+		max_num_constraints = configs['algorithm']['maximum number of constraints']
+
+		num_clusters = configs['algorithm']['number of clusters']
 
 
 
-		clf = KMeansConstrained(n_clusters=min_num_clusters, size_min=min_num_clusters, size_max=max_num_clusters)
+		clf = KMeansConstrained(n_clusters=num_clusters, size_min=min_num_constraints, size_max=max_num_constraints)
 
 		accuracy_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='accuracy')
 

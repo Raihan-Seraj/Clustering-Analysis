@@ -42,9 +42,8 @@
 "number of clusters": 5,
 "minimum number of clusters": 2,
 "maximum number of clusters": 7,
-"must link constraints": "[(0, 10), (0, 20), (0, 30)]",
-"cannot link constraints":"[(1, 10), (2, 10), (3, 10)]"
-},
+"minimum number of constraints": 2,
+"maximum number of constraints": 50},
 "__options" : "K-means, X-means, Constrained_K-means, K-Prototype, Kernel_K-means",
 
 "classification type": "Multiclass",
