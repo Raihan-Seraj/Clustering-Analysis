@@ -51,6 +51,8 @@ def classify(X_train, y_train,configs):
 
 	if configs['algorithm']['name']=="X-means":
 
+		print("Running X-Means Algorithm")
+
 		
 		min_num_clusters = configs['algorithm']['minimum number of clusters']
 
@@ -82,6 +84,8 @@ def classify(X_train, y_train,configs):
 
 
 	if configs['algorithm']['name']=="Constrained_K-means":
+
+		print("Running Constrained K-Means Algorithm")
 
 		min_num_constraints = configs['algorithm']['minimum number of constraints']
 
@@ -116,6 +120,8 @@ def classify(X_train, y_train,configs):
 
 	
 	if configs['algorithm']['name']=='K-Prototype':
+
+		print("Running K-Prototype Algorithm")
 
 		num_clusters=configs['algorithm']['number of clusters']
 
