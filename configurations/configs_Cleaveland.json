@@ -38,7 +38,7 @@
 
 "algorithm":{
 
-"name": "Constrained_K-means",
+"name": "K-Prototype",
 "number of clusters": 5,
 "minimum number of clusters": 2,
 "maximum number of clusters": 7,

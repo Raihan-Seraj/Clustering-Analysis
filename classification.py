@@ -18,6 +18,7 @@ def classify(X_train, y_train,configs):
 			print("Running Binary Classification")
 
 			num_clusters =2
+			#import ipdb;ipdb.set_trace()
 		else:
 			print("Running Multiclass Classification")
 
@@ -27,7 +28,7 @@ def classify(X_train, y_train,configs):
 
 		clf = KMeans(n_clusters=num_clusters)
 
-		#import ipdb;ipdb.set_trace()
+
 		
 		accuracy_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='accuracy')
 
@@ -141,7 +142,7 @@ def classify(X_train, y_train,configs):
 
 		
 	
-	if configs['algorithm']['Kernel_K-means']:
+	if configs['algorithm']['name']=='Kernel_K-means':
 		pass
 
 		
