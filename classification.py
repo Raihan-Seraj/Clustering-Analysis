@@ -4,9 +4,9 @@ from sklearn.cluster import *
 from classifiers import x_means
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import adjusted_rand_score
-
+from kmodes.kprototypes import KPrototypes
 from k_means_constrained import KMeansConstrained
-
+from sklearn.pipeline import Pipeline
 
 def classify(X_train, y_train,configs):
 
@@ -112,9 +112,34 @@ def classify(X_train, y_train,configs):
 
 
 
+
 	
-	if configs['algorithm']['K-Prototype']:
-		pass
+	if configs['algorithm']['name']=='K-Prototype':
+
+		num_clusters=configs['algorithm']['number of clusters']
+
+		clf=KPrototypes(n_clusters=num_clusters,init='Huang')
+		fit_params={'categorical': [1,2]}
+
+		accuracy_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='accuracy',fit_params=fit_params)
+
+		rand_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='adjusted_rand_score',fit_params=fit_params)
+
+		homogeneity_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='homogeneity_score',fit_params=fit_params)
+
+		mutual_info_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='mutual_info_score',fit_params=fit_params)
+
+		completeness_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='completeness_score',fit_params=fit_params)
+
+		if configs['classification type']=="Binary":
+
+			f1_scores = cross_val_score(pipeline, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='f1_macro', fit_params=fit_params)
+
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
+		else:
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores
+
+		
 	
 	if configs['algorithm']['Kernel_K-means']:
 		pass
