@@ -1,0 +1,59 @@
+{
+	
+	"config_id": 7,
+
+	"preprocessing":{
+
+		"StandardScaler": false,
+
+		"MinMaxScaler": false,
+
+		"Missing_Instance": true,
+
+		"Cross_Validation_Fold": 5
+
+	},
+
+	"post_result_directory":"./results/",
+
+	"datasets":{
+
+		
+
+		"Cleaveland_Heart_Disease": "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+
+		"KDD_10_percent": "https://archive.ics.uci.edu/ml/machine-learning-databases/kddcup99-mld/kddcup.data_10_percent.gz",
+
+		"Wisconsin_Diagnostic_Breast_Cancer": "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data",
+
+		"Epileptic_Seizure": "https://archive.ics.uci.edu/ml/machine-learning-databases/00388/data.csv",
+
+		"Credit_Approval": "https://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.data",
+
+		"Post_Operative": "https://archive.ics.uci.edu/ml/machine-learning-databases/postoperative-patient-data/post-operative.data",
+
+		"UNSW": "https://www.unsw.adfa.edu.au/unsw-canberra-cyber/cybersecurity/ADFA-NB15-Datasets/?fbclid=IwAR3Y61kKR17LvG1wbWwYR7YisQf9hWYlCT7pr6J2NwATW7Yu4Q5miOwZMpw"
+
+	},
+
+"save_post_analysis_results": true,
+
+"algorithm":{
+
+"name": "K-means",
+"number of clusters": 5,
+"minimum number of clusters": 2,
+"maximum number of clusters": 7,
+"minimum number of constraints": 2,
+"maximum number of constraints": 50},
+"__options" : "K-means, X-means, Constrained_K-means, K-Prototype, Kernel_K-means",
+
+"classification type": "Binary",
+"__options" : "Binary, Multiclass"
+
+ 
+
+
+
+
+}
