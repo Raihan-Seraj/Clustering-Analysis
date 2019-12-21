@@ -7,7 +7,7 @@ from sklearn.metrics import adjusted_rand_score
 #from kmodes.kprototypes import KPrototypes
 from k_means_constrained import KMeansConstrained
 from sklearn.pipeline import Pipeline
-from classifiers.kmodes.kmodes import kprototypes 
+from kmodes import kprototypes 
 import numpy as np
 from sklearn.model_selection import train_test_split
 import sklearn.metrics as metrics
