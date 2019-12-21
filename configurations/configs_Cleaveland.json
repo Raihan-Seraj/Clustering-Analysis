@@ -38,12 +38,14 @@
 
 "algorithm":{
 
-"name": "Constrained_K-means",
-"number of clusters": 5,
+"name": "Kernel_K-means",
+"number of clusters": 2,
 "minimum number of clusters": 2,
 "maximum number of clusters": 2,
 "minimum number of constraints": 2,
-"maximum number of constraints": 50},
+"maximum number of constraints": 50,
+"categorical": [0,1,2,5,6,8,10,11,12]
+},
 "__options" : "K-means, X-means, Constrained_K-means, K-Prototype, Kernel_K-means",
 
 "classification type": "Binary",

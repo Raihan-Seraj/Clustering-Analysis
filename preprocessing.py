@@ -70,9 +70,15 @@ def preprocess(data_url, dataname,configs):
 
 
 	if dataname=="Cleaveland_Heart_Disease":
+		y_temp = np.array(data.iloc[:,-1]).reshape(-1,1)
+		
+		for ii in range(y_temp.shape[0]):
+			if y_temp[ii,0]>0:
+				y_temp[ii,0]=1
 
-		y_train = np.array(data.iloc[:,-1]).reshape(-1,1)
+		y_train = y_temp#np.array(data.iloc[:,-1]).reshape(-1,1)
 		features = np.array(data.iloc[:,0:-1])
+
 
 		if configs['preprocessing']['Missing_Instance']:
 			print("Missing Instance replaced with median")
@@ -246,7 +252,6 @@ def preprocess(data_url, dataname,configs):
 			X_train = scaled_features
 		else:
 			X_train = features
-
 
 	return X_train, y_train.reshape(-1,) 
 

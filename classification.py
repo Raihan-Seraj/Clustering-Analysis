@@ -172,15 +172,14 @@ def classify(X_train, y_train,configs):
 			homogeneity_scores.append(metrics.homogeneity_score(y_test_cv,prediction))
 			mutual_info_scores.append(metrics.mutual_info_score(y_test_cv,prediction))
 			completeness_scores.append(metrics.completeness_score(y_test_cv,prediction))
-			f1_scores.append(metrics.f1_score(y_test_cv,prediction))
+			
+			if configs['classification type']=="Binary":
+				
+				f1_scores.append(metrics.f1_score(y_test_cv,prediction))
+				
+
 			
 
-
-		# homogeneity_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='homogeneity_score',fit_params=catdict)
-
-		# mutual_info_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='mutual_info_score',fit_params=catdict)
-
-		# completeness_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing'y]['Cross_Validation_Fold'],scoring='completeness_score',fit_params=catdict)
 
 		if configs['classification type']=="Binary":
 
