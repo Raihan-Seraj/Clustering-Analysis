@@ -7,6 +7,7 @@
 		"StandardScaler": false,
 
 		"Missing_Instance": true,
+		"MinMaxScaler": false,
 
 		"Cross_Validation_Fold": 5
 
@@ -36,10 +37,11 @@
 
 "algorithm":{
 
-"name": "K-means",
-"number of clusters": 5,
+"name": "Kernel_K-means",
+"number of clusters": 3,
 "mininum number of clusters": 2,
-"maximum number of clusters": 7
+"maximum number of clusters": 7,
+"categorical":[0, 1, 2, 3, 4, 5, 6]
 },
 "__options" : "K-means, X-means, Constrained_K-means, K-Prototype, Kernel_K-means",
 

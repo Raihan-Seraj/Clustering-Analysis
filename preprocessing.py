@@ -9,6 +9,7 @@ import numpy as np
 from sklearn.impute import SimpleImputer
 import category_encoders as ce
 import glob
+from sklearn.preprocessing import OrdinalEncoder
 def clean_dataset(df):
     assert isinstance(df, pd.DataFrame), "df needs to be a pd.DataFrame"
     df.dropna(inplace=True)
@@ -253,6 +254,58 @@ def preprocess(data_url, dataname,configs):
 		else:
 			X_train = features
 
+
+
+	if dataname=="Post_Operative":
+		
+		dataset=data
+		
+		y_train=pd.factorize(np.array(dataset.iloc[:,-1]))[0]
+		
+		
+		features= np.array(dataset.iloc[:,0:-1])
+
+		## Encoding string values to numbers
+		
+		for ii in range(features.shape[1]):
+
+			ft_temp= pd.factorize(features[:,ii])[0]
+			features[:,ii]=ft_temp
+
+		if configs['preprocessing']['Missing_Instance']:
+			print("Missing Instance replaced with median")
+
+			imp = SimpleImputer(missing_values='?',fill_value=np.nan, strategy='constant')
+			
+			features_new = imp.fit_transform(features)
+			
+			imp_rem = SimpleImputer(missing_values=np.nan, strategy='median')
+
+			features = imp_rem.fit_transform(features_new)
+		else:
+			features=features
+		
+		if configs['preprocessing']['StandardScaler']:
+			from sklearn.preprocessing import StandardScaler
+			print("Using StandardScaler")
+		
+			scaler = StandardScaler()
+		
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		elif configs['preprocessing']['MinMaxScaler']:
+			from sklearn.preprocessing import MinMaxScaler
+			print("Using MinMax Scaler")
+			
+			scaler=MinMaxScaler(feature_range=(0,1))
+			
+			scaled_features = scaler.fit_transform(features)
+
+			X_train = scaled_features
+		else:
+			X_train = features
+	#import ipdb;ipdb.set_trace()
 	return X_train, y_train.reshape(-1,) 
 
 
