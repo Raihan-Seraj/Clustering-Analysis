@@ -2,6 +2,7 @@ from sklearn.cluster import *
 # from pyclustering.cluster.xmeans import xmeans 
 # from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer
 from classifiers import x_means
+from classifiers import kernel_k_means
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import adjusted_rand_score
 #from kmodes.kprototypes import KPrototypes
@@ -189,7 +190,39 @@ def classify(X_train, y_train,configs):
 		
 	
 	if configs['algorithm']['name']=='Kernel_K-means':
-		pass
+
+		print("Running Kernel K-Means Algorithm")
+
+		
+
+		num_clusters = configs['algorithm']['number of clusters']
+
+		#import ipdb;ipdb.set_trace()
+
+
+
+		
+		clf = kernel_k_means.KernelKMeans(n_clusters=num_clusters)
+
+		#clf=KMeansConstrained(n_clusters=num_clusters)
+
+		accuracy_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='accuracy')
+
+		rand_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='adjusted_rand_score')
+
+		homogeneity_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='homogeneity_score')
+
+		mutual_info_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='mutual_info_score')
+
+		completeness_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='completeness_score')
+
+		if configs['classification type']=="Binary":
+
+			f1_scores = cross_val_score(clf, X_train, y_train, cv=configs['preprocessing']['Cross_Validation_Fold'],scoring='f1_macro')
+
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores,f1_scores
+		else:
+			return accuracy_scores, rand_scores, homogeneity_scores, mutual_info_scores, completeness_scores
 
 		
 

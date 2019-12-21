@@ -37,7 +37,7 @@
 
 "algorithm":{
 
-"name": "K-Prototype",
+"name": "Kernel_K-means",
 "number of clusters": 2,
 "mininum number of clusters": 2,
 "maximum number of clusters": 7,
