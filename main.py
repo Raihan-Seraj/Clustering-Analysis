@@ -7,16 +7,17 @@ import requests
 import preprocessing 
 import classification
 
-with open('configurations/configs_Credit_Approval.json') as config_file:
+with open('configurations/configs_Post_Operative.json') as config_file:
     configs = json.load(config_file)
 
 
 #data_name= 'Wisconsin_Diagnostic_Breast_Cancer'
 #data_name = 'Cleaveland_Heart_Disease'
-data_name = 'Credit_Approval'
+#data_name = 'Credit_Approval'
 #data_name = 'Epileptic_Seizure'
 #data_name = 'KDD_10_percent'
 #data_name="UNSW"
+data_name="Post_Operative"
 data_url = configs['datasets'][data_name]
 
 
