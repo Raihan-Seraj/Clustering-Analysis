@@ -37,14 +37,14 @@
 
 "algorithm":{
 
-"name": "K-means",
-"number of clusters": 5,
-"mininum number of clusters": 2,
-"maximum number of clusters": 7
+"name": "X-means",
+"number of clusters": 2,
+"minimum number of clusters": 2,
+"maximum number of clusters": 2
 },
 "__options" : "K-means, X-means, Constrained_K-means, K-Prototype, Kernel_K-means",
 
-"classification type": "Multiclass",
+"classification type": "Binary",
 "__options" : "Binary, Multiclass"
 
  
